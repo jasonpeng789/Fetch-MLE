@@ -4,7 +4,18 @@ from models.autoregressive import AutoRegressiveModel
 from models.lstm import LSTMModel
 
 
-def prediction_ar(csv_file, seq_length=3):
+def prediction_ar(csv_file: str, seq_length: int = 3) -> list[int]:
+    """
+    Predicts future values using an autoregressive model.
+
+    Parameters:
+    csv_file (str): The path to the CSV file containing the data.
+    seq_length (int, optional): The number of previous data points the model should consider for 
+                                making a prediction. Default is 3.
+
+    Returns:
+    List[int]: A list of predicted values for each future time point.
+    """
     # Initialize the model
     model = AutoRegressiveModel()
 
@@ -39,7 +50,16 @@ def prediction_ar(csv_file, seq_length=3):
     return predictions
 
 
-def prediction_lstm(csv_file):
+def prediction_lstm(csv_file: str) -> list[float]:
+    """
+    Predicts future values using a trained LSTM model.
+
+    Parameters:
+    csv_file (str): The path to the CSV file containing the data.
+
+    Returns:
+    List[float]: A list of predicted values for each future time point.
+    """
     # Initialize the model
     # Hyperparameters
     input_dim = 1
@@ -82,7 +102,7 @@ def prediction_lstm(csv_file):
         
         # Denormalize
         predicted_value = (prediction.numpy() * std) + mean
-        predictions.append(predicted_value[0][0])
+        predictions.append(int(predicted_value[0][0]))
    
         # Update the prediction dataset
         input = np.append(input, predicted_value[0][0])[1:]

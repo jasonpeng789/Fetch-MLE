@@ -5,12 +5,31 @@ import matplotlib.pyplot as plt
 
 
 def load_csv_file(filepath:str) -> pd.DataFrame:
+    """
+    Loads a CSV file into a pandas DataFrame.
+
+    Parameters:
+    filepath (str): The path to the CSV file to be loaded.
+
+    Returns:
+    pd.DataFrame: A DataFrame containing the data from the CSV file.
+    """
     # Load the csv file and build a dataframe
     dataframe = pd.read_csv(filepath)
     return dataframe
 
 
-def data_process(filepath:str, visual=False):
+def data_process(filepath: str, visual: bool = False) -> pd.DataFrame:
+    """
+    Processes the data from a CSV file and optionally visualizes it.
+
+    Parameters:
+    filepath (str): The path to the CSV file to be processed.
+    visual (bool, optional): Whether to display a plot of the processed data. Default is False.
+
+    Returns:
+    pd.DataFrame: A DataFrame with the processed data, aggregated monthly.
+    """
     # Get the loaded dataframe
     df = load_csv_file(filepath)
 
@@ -69,12 +88,34 @@ def create_sequences(data: np.array, seq_length: int = 3) -> tuple:
 
 
 # Function to normalize data
-def normalize(data, mean, std):
+def normalize(data: np.array, mean: float, std: float) -> np.array:
+    """
+    Normalizes data using the given mean and standard deviation.
+
+    Parameters:
+    data (np.array): The data to be normalized.
+    mean (float): The mean value used for normalization.
+    std (float): The standard deviation used for normalization.
+
+    Returns:
+    np.array: The normalized data.
+    """
     return (data - mean) / std
 
 
 # Function to denormalize data
-def denormalize(data, mean, std):
+def denormalize(data: np.array, mean: float, std: float) -> np.array:
+    """
+    Denormalizes data using the given mean and standard deviation.
+
+    Parameters:
+    data (np.array): The data to be denormalized.
+    mean (float): The mean value used for denormalization.
+    std (float): The standard deviation used for denormalization.
+
+    Returns:
+    np.array: The denormalized data.
+    """
     return data * std + mean
 
 
@@ -105,7 +146,17 @@ def data_split(X: np.array, y: np.array, dl=False,  split_rate: float = 0.8) -> 
     return X_train, y_train, X_val, y_val
 
 
-def skew_detection(default_file_path, uploaded_file_path):
+def skew_detection(default_file_path: str, uploaded_file_path: str) -> bool:
+    """
+    Detects skewness between two datasets by comparing their means.
+
+    Parameters:
+    default_file_path (str): The path to the default CSV file.
+    uploaded_file_path (str): The path to the uploaded CSV file.
+
+    Returns:
+    bool: True if skewness is detected, otherwise False.
+    """
     # Load the default and uploaded files
     default_df = pd.read_csv(default_file_path)
     uploaded_df = pd.read_csv(uploaded_file_path)
