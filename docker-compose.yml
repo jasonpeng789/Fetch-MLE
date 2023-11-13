@@ -2,6 +2,6 @@ version: '3'
 
 services:
   web:
-    image: fetch-ml-app
+    image: jasonpeng789/fetch-ml-app
     ports:
       - "8000:5000"
