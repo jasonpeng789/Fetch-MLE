@@ -6,9 +6,25 @@ import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader, TensorDataset
 from data import *
 from models.autoregressive import AutoRegressiveModel
+from models.lstm import LSTMModel
 
 
-def train_ar(model, csv_file):
+def train_ar(model: AutoRegressiveModel, csv_file: str):
+    """
+    Trains an autoregressive model using the provided dataset.
+
+    The function processes the dataset from a CSV file, normalizes the data, creates sequences, 
+    and splits them into training and validation sets. The model is then trained on the training set 
+    and evaluated on the validation set. The trained model is saved to disk.
+
+    Parameters:
+    model (AutoRegressiveModel): The autoregressive model instance to be trained.
+    csv_file (str): The path to the CSV file containing the data.
+
+    Returns:
+    None: This function does not return a value but prints the model's mean squared error (MSE) 
+          after training and saves the model to disk.
+    """
     # Load and processed the dataset
     df_monthly = data_process(csv_file, visual=False)
 
@@ -32,7 +48,23 @@ def train_ar(model, csv_file):
         pickle.dump(model, file)
 
 
-def train_lstm(model, csv_file):
+def train_lstm(model: LSTMModel, csv_file: str):
+    """
+    Trains a Long Short-Term Memory (LSTM) model using the provided dataset.
+
+    The function processes the dataset from a CSV file, normalizes the data, creates sequences, 
+    and splits them into training and validation sets. The model is trained over several epochs 
+    and evaluated on the validation set. Training and validation losses are plotted and saved as 
+    an image, and the trained model is saved to disk.
+
+    Parameters:
+    model (LSTMModel): The LSTM model instance to be trained.
+    csv_file (str): The path to the CSV file containing the data.
+
+    Returns:
+    None: This function does not return a value but prints training and validation losses, saves 
+          the loss plot, and saves the trained model to disk.
+    """
     # Load and processed the dataset
     df_monthly = data_process(csv_file, visual=False)
 
