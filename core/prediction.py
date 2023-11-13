@@ -1,5 +1,5 @@
 import pickle
-from data import *
+from core.data import *
 from core.models.autoregressive import AutoRegressiveModel
 from core.models.lstm import LSTMModel
 
@@ -20,7 +20,7 @@ def prediction_ar(csv_file, seq_length=3):
     normalized_data = normalize(latest_data, mean, std)
 
     # Load the saved model
-    with open('core/trained_models/ar_model.pkl', 'rb') as file:
+    with open('/app/core/trained_models/ar_model.pkl', 'rb') as file:
         model = pickle.load(file)
     
     # Predict for each month of 2022
@@ -61,7 +61,7 @@ def prediction_lstm(csv_file):
     input = df_monthly['Receipt_Count']
 
     # Load the trained paramaters
-    model_path = 'core/trained_models/lstm_model.pth'
+    model_path = '/app/core/trained_models/lstm_model.pth'
     model.load_state_dict(torch.load(model_path))
     model.eval()
 

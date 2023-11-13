@@ -4,6 +4,7 @@ import sys
 from werkzeug.utils import secure_filename
 
 # Import prediction functions from core module
+sys.path.append('/app')
 sys.path.append('core')
 from core.prediction import prediction_ar, prediction_lstm
 from core.data import skew_detection
@@ -40,4 +41,4 @@ def upload_file():
     return render_template('index.html', alert=alert_message)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(host='0.0.0.0',debug=True, port=8080)
