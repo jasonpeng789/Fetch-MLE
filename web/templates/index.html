@@ -4,6 +4,11 @@
     <title>Receipt Prediction App</title>
 </head>
 <body>
+    <!-- Display alert message if skew is detected -->
+    {% if alert %}
+        <div style="color: red;">{{ alert }}</div>
+    {% endif %}
+    
     <h2>Upload CSV File and Select Model</h2>
     <form action="/" method="post" enctype="multipart/form-data">
         <input type="file" name="file">

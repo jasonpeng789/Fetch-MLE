@@ -103,3 +103,20 @@ def data_split(X: np.array, y: np.array, dl=False,  split_rate: float = 0.8) -> 
         y_val = torch.FloatTensor(y_val)
 
     return X_train, y_train, X_val, y_val
+
+
+def skew_detection(default_file_path, uploaded_file_path):
+    # Load the default and uploaded files
+    default_df = pd.read_csv(default_file_path)
+    uploaded_df = pd.read_csv(uploaded_file_path)
+
+    # Example skew detection logic
+    # Here, we're simply comparing means of all columns. You can modify this as needed.
+    skew_detected = False
+
+    default_mean = default_df['Receipt_Count'].mean()
+    uploaded_mean = uploaded_df['Receipt_Count'].mean()
+    if abs(default_mean - uploaded_mean) > 0.05:  # Define 'some_threshold'
+        skew_detected = True
+
+    return skew_detected
