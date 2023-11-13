@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+</head>
+<body>
+    <h2>Prediction Results for 2022</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Approximate Number of Scanned Receipts</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for month, prediction in month_predictions %}
+            <tr>
+                <td>{{ month }}</td>
+                <td>{{ prediction }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>          
+    </table>
+</body>
+</html>
