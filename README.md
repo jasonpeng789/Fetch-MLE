@@ -1,4 +1,12 @@
 # Fetch Rewards Machine Learning Engineer Exercise
+## Catalog 
+- [Introduction](#introduction)
+- [Models Selection](#models-selection)
+- [Pipeline Design](#pipeline-design)
+- [How to use?](#how-to-use)
+- [What's next?](#whats-next)
+- [Acknowledgement](#acknowledgement)
+
 ## Introduction
 At fetch, we are monitoring the number of the scanned receipts to our app on a daily base as one of our KPIs. From business standpoint, we sometimes need to predict the possible number of the scanned receipts for a given future month.
 
@@ -87,4 +95,7 @@ This pipeline is a simple version. If we can have more resources in the future, 
 - **MLOps** We should implement automatic CI/CD/CT pipeline to maintain the life cycle of the model deployment by using some cloud resouces.
 
 - **UI/UX** I only provide a very simple web UI/UX functions for this project. If possible, we should improve the UI/UX of the web and provide better experiences for the users.
+
+## Acknowledgement
+I would like to thank Fetch Reward for providing the database used for training and testing.
 
