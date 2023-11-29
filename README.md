@@ -21,6 +21,32 @@ For this project, I provided two different models to perform predictions: Autore
 For this project, the pipeline of processing the data, training and evaluating models, predicting the results, and monitoring the system, is designed as the following chart:
 ![image](pipeline.png)
 
+### Business Use Case Defination
+Use the number of the observed scanned receipts each day for the year 2021 to predict the approximate number of the scanned receipts for each month of 2022. 
+
+### Data Exploration
+The dataset (`data_daily.csv`) contains two columns: `# Date` and `Receipt_Count`. The first one is `string` type and the second one is `int` type. To make predictions for each month of 2022, we need to aggregrate data to monthly total numbers. The dataset shows that in general, with the time pass, the numbers are increasing, as the following figure shows:
+![image](/core/graphs/data.png)
+
+### Architecture and Algorithm Selection
+For this project, since the data shows regularly increasing with the time past, we can use Autoregressive model as a ML solution, and LSTM model as a DL solution. 
+
+### Data Pipeline and Feature Engineering
+The pipeline will load the csv file and create a DataFrame type dataset, and then aggregrate the data to get monthly total numbers for each month. Also, it can convert the `# Date` to DateTime type for furture load. Then the dataset will be normalized for ease of calculation.
+
+### Model Training
+The dataset is split into training and validation set, with the split rate equals to 0.2. We use the training set to train the AR model until its converges, and train the LSTM model for 200 epochs with the learning rate equals to 0.001
+
+### Model Evaluation
+Both models shows a good training results. However, due to the small size of the dataset, the difference of model performance may not be that useful. We need to collect much more data point to continue evaluating the models.
+
+### Model Deployment
+For this project, the entire pipeline is wrapped as a API and it is deployed on a Flask web app. If you want to deploy it on the cloud, AWS and GCP can be options. I have provided the Docker image and you can deploy it on the cloud with some set-up. 
+
+### Model Monitoring and Version Control
+In this pipeline I designed a simple monitor function to monitor the data draft. If the user upload a dataset that has relative big difference with the default dataset, the pipeline will jump an alert for it, and then we need to retrain the model. However, due to the time and resources limitation, I cannot provide more monitor features. We also need to monitor the health check and model decay problems. 
+
+
 ## How to use?
 ### Run the pipeline via docker file
 1. Please pull the docker image from the [docker image](https://hub.docker.com/r/jasonpeng789/fetch-ml-app) or run the following command in Terminal/Shell:
